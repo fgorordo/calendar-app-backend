@@ -86,6 +86,8 @@ const renewToken = async (req, res = response) => {
 
         return res.json({
             ok: true,
+            name,
+            uid: _id,
             token,
         });
     } catch (error) {
