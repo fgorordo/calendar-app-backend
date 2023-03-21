@@ -81,12 +81,20 @@ const loginUser = async (req, res = response) => {
 const renewToken = async (req, res = response) => {
     const { _id, name } = req;
 
-    const token = await generateToken(_id, name);
+    try {
+        const token = await generateToken(_id, name);
 
-    return res.json({
-        ok: true,
-        token,
-    });
+        return res.json({
+            ok: true,
+            token,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok:false,
+            msg: "Por favor hable con el administrador."
+        })
+    }
 };
 
 module.exports = { registerUser, loginUser, renewToken };
